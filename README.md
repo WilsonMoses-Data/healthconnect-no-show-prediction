@@ -1,70 +1,43 @@
 # HealthConnect: Intelligent Appointment Management
 
-An end-to-end healthcare data science project exploring how appointment data can be transformed into practical intelligence for improving patient attendance and clinic operations.
+> An ongoing healthcare data-science project exploring how appointment data can support responsible no-show prediction and more effective clinic operations.
 
-The project follows the complete data science lifecycle—from business understanding and data assessment to modelling, evaluation, deployment and feedback. Its initial use case is the prediction of appointment no-shows so that clinic staff can identify appointments that may benefit from timely attendance support.
+**Programme:** AnalystLab Africa Data Science Internship — Experience Lab  
+**Current phase:** Problem definition and initial data assessment  
+**Author:** [Wilson Moses](https://github.com/WilsonMoses-Data)
 
-> **Current phase:** Problem definition and initial data assessment  
-> **Programme:** AnalystLab Africa Data Science Internship — Experience Lab  
-> **Author:** Wilson Moses
+## Project overview
 
-## Project purpose
+Missed appointments can leave clinical capacity underused, disrupt schedules, and limit timely patient support. HealthConnect currently has limited data-driven capability to identify scheduled appointments that may be at risk of becoming no-shows.
 
-Missed appointments can leave clinical capacity underused, disrupt schedules and affect the delivery of timely patient services. HealthConnect currently has limited data-driven capability to identify which scheduled appointments may be at risk of becoming no-shows.
+This project applies the IBM Data Science Methodology to investigate whether historical appointment data can support a responsible and operationally useful attendance-intervention workflow.
 
-This project investigates whether historical appointment data can support a responsible and operationally useful solution that helps the clinic:
+> **Core question:** Can information available before a scheduled appointment help identify appointments at risk of becoming no-shows and support more effective attendance interventions?
 
-- understand patterns in appointment attendance;
-- estimate the likelihood of a future no-show;
-- prioritise appropriate reminder or follow-up support;
-- use scheduled appointment capacity more effectively; and
-- make informed decisions using interpretable evidence.
+## Objectives
 
-A model creates value only when its results support a suitable clinic action and that action leads to measurable operational improvement.
-
-## Core project question
-
-> Can HealthConnect use information available before a scheduled appointment to identify appointments at risk of becoming no-shows and support more effective attendance interventions?
-
-## Project objectives
-
-1. Define the clinic problem and translate it into a clear analytical task.
-2. Assess the quality, relevance and suitability of the available appointment data.
+1. Translate the clinic problem into a clear analytical task.
+2. Assess whether the supplied data is relevant, reliable, and available at the intended prediction point.
 3. Explore the factors associated with attendance and no-shows.
 4. Prepare a reproducible and leakage-safe modelling dataset.
-5. Develop and compare interpretable classification models.
-6. Evaluate predictive performance, operational usefulness and fairness.
+5. Establish an interpretable baseline and compare suitable classification models.
+6. Evaluate predictive performance, operational usefulness, and fairness.
 7. Demonstrate how risk estimates could support clinic workflows.
-8. Establish a feedback process for monitoring outcomes and model performance.
+8. Define a feedback process for monitoring outcomes and model performance.
 
-## Data science methodology
+## Current analytical approach
 
-The project is structured around the IBM Data Science Methodology.
+The proposed machine-learning task is supervised binary classification at appointment level.
 
-| Stage | Application to HealthConnect |
+| Element | Definition |
 |---|---|
-| Business Understanding | Define the operational problem, stakeholders, intended action and success criteria. |
-| Analytical Approach | Translate the business need into descriptive, diagnostic and predictive questions. |
-| Data Requirements | Determine which information is needed and when it must be available. |
-| Data Collection | Review the supplied resources, provenance and information gaps. |
-| Data Understanding | Examine structure, distributions, relationships and data-quality concerns. |
-| Data Preparation | Build a documented modelling cohort and leakage-safe preprocessing workflow. |
-| Modelling | Establish a baseline and compare suitable classification models. |
-| Evaluation | Assess model errors, operational value, interpretability and subgroup performance. |
-| Deployment | Demonstrate how clinic staff could access and act on predictions. |
-| Feedback | Monitor performance, outcomes, data drift and staff feedback over time. |
+| Positive class | `No-Show` |
+| Negative class | `Attended` |
+| Unit of analysis | One scheduled appointment |
+| Proposed output | Probability that an appointment results in a no-show |
+| Provisional prediction point | After booking and before the appointment occurs |
 
-## Proposed analytical approach
-
-The initial machine-learning task is **supervised binary classification** at appointment level:
-
-- **Positive class:** `No-Show`
-- **Negative class:** `Attended`
-- **Unit of analysis:** one scheduled appointment
-- **Proposed output:** probability that an appointment will result in a no-show
-- **Provisional prediction point:** after booking and before the appointment occurs
-
-`Cancelled` appointments are retained in the source data but temporarily excluded from the first binary experiment. They are not automatically classified as either attended appointments or no-shows. This decision will be revisited once cancellation timing and the intended scoring workflow are better understood.
+`Cancelled` appointments are retained in the source data but excluded from the first binary experiment. They are not automatically treated as attended appointments or no-shows.
 
 ## Dataset overview
 
@@ -81,16 +54,29 @@ The supplied fictional dataset contains historical appointment records for the H
 | Provisional binary cohort | 4,737 |
 | No-show rate in binary cohort | 51.15% |
 
-One record represents an appointment rather than a unique patient. A patient identifier may therefore appear in multiple records.
+One row represents an appointment, not a unique patient. Patient identifiers may therefore appear more than once.
+
+## Methodology
+
+| IBM Data Science stage | Application to HealthConnect |
+|---|---|
+| Business Understanding | Define the operational problem, stakeholders, intended intervention, and success criteria |
+| Analytical Approach | Translate the business need into descriptive, diagnostic, and predictive questions |
+| Data Requirements | Determine the required information and when it must be available |
+| Data Collection | Review supplied resources, provenance, and information gaps |
+| Data Understanding | Examine structure, distributions, relationships, and quality concerns |
+| Data Preparation | Define the modelling cohort and build leakage-safe preprocessing |
+| Modelling | Establish a baseline and compare suitable classifiers |
+| Evaluation | Assess errors, operational value, interpretability, and subgroup performance |
+| Deployment | Demonstrate how clinic staff could access and act on predictions |
+| Feedback | Monitor performance, outcomes, drift, and staff feedback |
 
 ## Initial data assessment
 
-The first assessment indicates that the data can support a learning prototype, subject to documented assumptions and further validation.
-
 ### Positive findings
 
-- No exact duplicate records or duplicate appointment identifiers were detected.
-- Derived weekday, age-group and booking-lead-time fields agree with their source variables.
+- No exact duplicate rows or duplicate appointment identifiers were detected.
+- Derived weekday, age-group, and booking-lead-time fields agree with their source variables.
 - Previous no-show counts do not exceed previous appointment counts.
 - The provisional binary target is approximately balanced.
 
@@ -98,117 +84,115 @@ The first assessment indicates that the data can support a learning prototype, s
 
 - `distance_to_clinic_km` is missing in 90 records.
 - `estimated_waiting_time_min` is missing in 60 records.
-- The literal value `None` in `reminder_channel` represents no reminder channel and must not be mistaken for an unknown value.
-- The actual CSV date format differs from the ISO format stated in the data dictionary.
-- The dataset includes 737 Sunday appointments despite the stated Sunday closure.
-- Repeated patient identifiers contain age histories that may not represent reliable longitudinal patient records.
-- The creation time of the waiting-time estimate is unspecified, so its availability at prediction time is uncertain.
-- Reminder and cancellation timestamps are unavailable, limiting reconstruction of what staff knew at a particular decision point.
+- The literal value `None` in `reminder_channel` represents no reminder channel, not an unknown value.
+- The CSV date format differs from the ISO format stated in the data dictionary.
+- The data contains 737 Sunday appointments despite a stated Sunday closure.
+- Repeated patient identifiers contain age histories that may not support reliable longitudinal interpretation.
+- The creation time of the waiting-time estimate is unspecified, making prediction-time availability uncertain.
+- Reminder and cancellation timestamps are unavailable, limiting reconstruction of what staff knew at a given decision point.
 
-These issues will not be silently corrected. Each one will be investigated, documented and either resolved, excluded or retained with an explicit limitation.
+These issues are documented rather than silently corrected. Each will be resolved, excluded, or retained with an explicit limitation.
 
-## Potential feature groups
+## Candidate feature groups
 
-Candidate predictors will be evaluated for relevance, reliability, fairness and availability at the selected prediction point.
-
-| Feature group | Examples |
+| Group | Examples |
 |---|---|
-| Demographic | Age, age group and gender |
-| Appointment | Appointment type, weekday and time period |
+| Demographic | Age, age group, gender |
+| Appointment | Appointment type, weekday, time period |
 | Booking | Booking lead days |
-| Patient history | Previous appointments and previous no-shows |
-| Engagement | Reminder status and reminder channel |
-| Accessibility | Distance to the clinic |
+| Patient history | Previous appointments, previous no-shows |
+| Engagement | Reminder status, reminder channel |
+| Accessibility | Distance to clinic |
 | Operational | Estimated waiting time |
 
-Record identifiers will not be treated as ordinary predictive features. Any variable created or updated after the prediction point will be excluded to prevent data leakage.
+Identifiers will not be used as ordinary predictors. Variables created or updated after the prediction point will be excluded to prevent leakage.
 
 ## Planned modelling and evaluation
-
-The modelling stage will begin with a simple benchmark before introducing more sophisticated methods.
 
 1. Define the eligible modelling cohort.
 2. Separate training and test data appropriately.
 3. Fit preprocessing operations using training data only.
-4. Establish a simple baseline.
+4. Establish a simple benchmark.
 5. Train an interpretable logistic-regression model.
 6. Compare selected tree-based alternatives where justified.
-7. Evaluate precision, recall, F1-score, ROC-AUC and confusion matrices.
-8. Select decision thresholds using clinic priorities rather than accuracy alone.
-9. Review interpretability and performance across relevant patient groups.
-10. Assess whether predictions can support a realistic staff intervention.
+7. Evaluate precision, recall, F1-score, ROC-AUC, and confusion matrices.
+8. Select thresholds using clinic priorities rather than accuracy alone.
+9. Review interpretability and subgroup performance.
+10. Assess whether predictions support a realistic staff intervention.
 
-Final metrics and model choices will be added only after the relevant modelling and evaluation stages are completed.
+Final metrics and model choices will be published only after the modelling and evaluation stages are completed.
+
+## Project status
+
+| Phase | Status |
+|---|---|
+| Business understanding and problem definition | Completed |
+| Initial data-quality and suitability assessment | Completed |
+| Structured exploratory analysis | Planned |
+| Data preparation and feature engineering | Planned |
+| Modelling | Planned |
+| Predictive, operational, and fairness evaluation | Planned |
+| Deployment demonstration | Planned |
+| Feedback and monitoring framework | Planned |
+
+## Repository contents
+
+```text
+HealthConnect-Healthcare-Data-Science-AI-Project/
+├── README.md
+├── LICENSE
+├── HealthConnect_Appointment_Data.csv
+├── HealthConnect_Data_Dictionary - Data Dictionary.csv
+├── HealthConnect_Week4_ML_Problem_Definition.ipynb
+├── HealthConnect_Week4_ML_Problem_Definition_Report.pdf
+└── HealthConnect_Week4_Project_Summary.pdf
+```
+
+### Key files
+
+- [`HealthConnect_Week4_ML_Problem_Definition.ipynb`](HealthConnect_Week4_ML_Problem_Definition.ipynb) — executed notebook covering the problem definition and initial assessment.
+- [`HealthConnect_Week4_ML_Problem_Definition_Report.pdf`](HealthConnect_Week4_ML_Problem_Definition_Report.pdf) — formal project report.
+- [`HealthConnect_Week4_Project_Summary.pdf`](HealthConnect_Week4_Project_Summary.pdf) — concise Week 4 summary.
+
+## Tools used
+
+- Python
+- pandas
+- NumPy
+- Jupyter Notebook
+
+Later phases will document additional tools only when they are actually used.
 
 ## Responsible use
 
-This is an educational project based on a fictional clinic scenario. It is not a clinical decision system and should not be used to diagnose, rank or deny care to patients.
+This is an educational project based on a fictional clinic scenario. It is not a clinical decision system and must not be used to diagnose patients, rank access to care, or deny services.
 
-The project will consider patient privacy, responsible use of demographic variables, unequal error rates across patient groups, the distinction between prediction and causation, transparent communication of uncertainty, human review and continued monitoring. Patients should receive supportive rather than punitive interventions based on predicted risk.
+The project considers privacy, responsible use of demographic variables, unequal error rates, prediction versus causation, uncertainty, human review, and continued monitoring. Any intervention should be supportive rather than punitive.
 
-## Project roadmap
+## Reproducing the current analysis
 
-| Phase | Focus | Status |
-|---|---|---|
-| 1. Foundation | Resource review, business understanding and problem definition | Completed |
-| 2. Data assessment | Initial quality and suitability analysis | Completed |
-| 3. Exploration | Structured exploratory data analysis and hypothesis development | Planned |
-| 4. Preparation | Cleaning, feature engineering and modelling-cohort creation | Planned |
-| 5. Modelling | Baseline and candidate classification models | Planned |
-| 6. Evaluation | Predictive, operational and fairness assessment | Planned |
-| 7. Deployment | Demonstration of prediction delivery and staff use | Planned |
-| 8. Feedback | Monitoring, learning and improvement framework | Planned |
+1. Clone the repository.
+2. Create a Python environment.
+3. Install Jupyter, pandas, and NumPy.
+4. Open `HealthConnect_Week4_ML_Problem_Definition.ipynb`.
+5. Run the notebook from top to bottom with the CSV files retained at repository root.
 
-The roadmap will be updated as new evidence changes the project assumptions or analytical direction.
+The repository should add a pinned dependency file as the project expands.
 
-## Current repository structure
+## Learning outcomes
 
-```text
-HealthConnect/
-├── data/
-│   └── raw/
-│       ├── HealthConnect_Appointment_Data.csv
-│       └── HealthConnect_Data_Dictionary.csv
-├── notebooks/
-│   └── HealthConnect_Week4_ML_Problem_Definition.ipynb
-├── reports/
-│   ├── HealthConnect_Week4_ML_Problem_Definition_Report.docx
-│   ├── HealthConnect_Week4_ML_Problem_Definition_Report.pdf
-│   ├── HealthConnect_Week4_Project_Summary.docx
-│   └── HealthConnect_Week4_Project_Summary.pdf
-├── supporting/
-│   └── HealthConnect_Week4_Data_Quality_Decision_Log.md
-└── README.md
-```
+- Translating a business problem into a data-science problem.
+- Applying the IBM Data Science Methodology.
+- Assessing data suitability before modelling.
+- Distinguishing predictions from interventions and business outcomes.
+- Identifying data leakage and prediction-time constraints.
+- Communicating assumptions, risks, and limitations.
 
-The original data is preserved in `data/raw/`. Cleaned or transformed datasets created later should be stored separately so that all processing steps remain reproducible.
+## Licence and acknowledgement
 
-## Current deliverables
+Original code and documentation are released under the repository’s [MIT Licence](LICENSE). The HealthConnect scenario and supplied resources were provided for educational use through the AnalystLab Africa Experience Lab; their inclusion does not transfer ownership of the underlying material.
 
-- Machine Learning Problem Definition Report
-- Executed Problem Definition and Data Assessment Notebook
-- Week 4 Project Summary
-- Data Quality and Decision Log
-- Project README
+## Contact
 
-## Key learning outcomes
-
-This project demonstrates the ability to:
-
-- translate a business problem into a data science problem;
-- apply the IBM Data Science Methodology;
-- assess whether data is suitable before modelling;
-- distinguish business objectives, predictions and interventions;
-- identify data leakage and prediction-time constraints;
-- document assumptions, risks and limitations; and
-- communicate technical findings to non-technical stakeholders.
-
-## Author
-
-**Wilson Moses**  
-Aspiring Data Scientist and AI Engineer  
-AnalystLab Africa — Data Science Internship Programme, Batch D
-
-## Acknowledgement
-
-Developed as part of the AnalystLab Africa Experience Lab. The HealthConnect clinic scenario and supplied resources are used for educational and portfolio purposes.
+**Wilson Moses** — Data Scientist × AI Engineer in development  
+[LinkedIn](https://www.linkedin.com/in/wilson-moses-9207b22bb) · [GitHub](https://github.com/WilsonMoses-Data) · [Moses Learns Data](https://www.tiktok.com/@moses.learnsdata)
