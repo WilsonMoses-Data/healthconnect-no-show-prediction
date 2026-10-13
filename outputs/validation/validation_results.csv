@@ -1,0 +1,40 @@
+test,expected_result,actual_result,status,issue,action,retest_result,evidence
+Original source integrity,"Original SHA-256 and 5,000 x 18 retained",1f2c40ae14833b46fe6e1a353446a0e038f19ae06434b37d98545b3e28697137,PASS,,Validated current implementation,PASS,data/raw/healthconnect_appointment_data.csv
+Target and temporal split,"Cancelled excluded, target No-Show=1, non-overlapping appointments and dates","3,682 train; 799 reused comparison; 256 purged",PASS,,Validated current implementation,PASS,outputs/model/metrics/fold_definitions.csv
+Internal fold chronology,All training outcomes precede validation bookings,All three folds separate available outcomes from later bookings,PASS,,Validated current implementation,PASS,outputs/model/metrics/fold_definitions.csv
+Candidate and threshold provenance,Existing internal ranking and workload rule reproduce,No-history logistic; threshold 0.600; internal predictions only,PASS,,Validated current implementation,PASS,outputs/model/metrics/threshold_scenarios.csv
+Preprocessing and feature eligibility,"Fit statistics match training only and class order is [0,1]",Training medians/categories match; identifiers/outcomes/history/reminders/waiting time excluded,PASS,,Validated current implementation,PASS,models/candidate_pipeline.joblib
+Frozen prediction and baseline parity,"Same appointments, targets and saved probabilities",All 799 candidate and baseline probabilities agree within 1e-12,PASS,,Validated current implementation,PASS,outputs/model/metrics/reused_test_predictions.csv
+Classification metric reconciliation,Metrics and confusion matrices match saved predictions,5 result rows independently recalculated,PASS,,Validated current implementation,PASS,outputs/model/metrics/reused_test_comparison.csv
+Valid batch preserves IDs and bounds,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Missing required field rejected,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Duplicate IDs rejected,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Invalid date rejected,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Appointment before booking rejected,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Negative distance rejected,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Missing age rejected,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Out-of-scope age rejected,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Infinite distance rejected,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Empty batch rejected,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Blank appointment type rejected,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Missing distance imputed and flagged,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Unknown category supported and flagged,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Selected candidate needs no history columns,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Outcome IDs and unused history cannot alter scores,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Row reordering preserves individual scores,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Single and batch scoring agree,Documented interface behaviour,PASS,PASS,,Reran original interface check,PASS,tests/test_interface.py
+Duplicate columns rejected,Clear ValueError instead of pandas TypeError,Duplicate input column names are not allowed,PASS,,Validated current implementation,PASS,src/healthconnect.py
+Wrong input container rejected,Clear ValueError,Input must be a pandas DataFrame,PASS,,Validated current implementation,PASS,src/healthconnect.py
+Nonnumeric distance rejected,Clear ValueError,Invalid numeric distance_to_clinic_km,PASS,,Validated current implementation,PASS,src/healthconnect.py
+Blank appointment ID rejected,Clear ValueError,Appointment IDs must be nonempty,PASS,,Validated current implementation,PASS,src/healthconnect.py
+Invalid calendar date rejected,Clear ValueError,Invalid booking_date; use month/day/year,PASS,,Validated current implementation,PASS,src/healthconnect.py
+Column-order invariance,Probabilities unchanged,Input column order does not change scores,PASS,,Validated current implementation,PASS,src/healthconnect.py
+Sunday warning,All Sunday inputs flagged,Sunday conflicts flagged,PASS,,Validated current implementation,PASS,src/healthconnect.py
+Full-source batch and chunk reliability,"5,000 records preserve order, threshold rule and batch/chunk parity","5,000 synthetic records, chunk parity <=1e-12; batch 0.213s (observation, no SLA). Includes cancelled records for schema stress only, not model-validity evidence.",PASS,,Validated current implementation,PASS,src/healthconnect.py
+Analytics-to-model cohort and KPI parity,"Same 4,737 eligible rows and correct denominators",All seven KPIs agree with independent source calculation,PASS,,Validated current implementation,PASS,outputs/analytics/kpi_summary.csv
+Segment analytics reconciliation,"Group counts, rates and totals agree","Lead-time, reminder and appointment-type tables reconcile to source and totals",PASS,,Validated current implementation,PASS,outputs/analytics/
+Dashboard data and image consistency,Visible values match exports; chart paths exist,"Visible cards, evidence payload and chart paths reconcile; static dashboard has no filters",PASS,,Validated current implementation,PASS,dashboard/index.html
+Fresh temporal evaluation,"New later labelled appointments, not the reused 799 records",Evidence not supplied,BLOCKED,External evidence unavailable,Document limitation; do not invent evidence,NOT RUN,docs/validation.md
+Verified human HC-POD collaboration,Actual participant exchange or programme acceptance,Evidence not supplied,BLOCKED,External evidence unavailable,Document limitation; do not invent evidence,NOT RUN,docs/validation.md
+Operational readiness,"Confirmed cancellation workflow, scheduling, identity, fairness and capacity criteria",Evidence not supplied,BLOCKED,External evidence unavailable,Document limitation; do not invent evidence,NOT RUN,docs/validation.md
+Dashboard filters,Interactive filter behaviour if implemented,Static report has no filter controls,NOT APPLICABLE,,No new filtering feature required,NOT APPLICABLE,dashboard/index.html

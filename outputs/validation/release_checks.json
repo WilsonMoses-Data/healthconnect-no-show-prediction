@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-11",
+  "python": "3.12.14",
+  "clean_environment_install": "PASS: core and optional notebook requirements installed into isolated venv",
+  "notebooks": [
+    {
+      "notebook": "notebooks/03_model_comparison.ipynb",
+      "code_cells": 1,
+      "status": "PASS",
+      "method": "Sequential Python execution in a fresh process; not a Jupyter kernel"
+    },
+    {
+      "notebook": "notebooks/01_ml_problem_definition.ipynb",
+      "code_cells": 8,
+      "status": "PASS",
+      "method": "Sequential Python execution in a fresh process; not a Jupyter kernel"
+    },
+    {
+      "notebook": "notebooks/02_baseline_modelling.ipynb",
+      "code_cells": 8,
+      "status": "PASS",
+      "method": "Sequential Python execution in a fresh process; not a Jupyter kernel"
+    },
+    {
+      "notebook": "notebooks/04_final_analytics.ipynb",
+      "code_cells": 6,
+      "status": "PASS",
+      "method": "Sequential Python execution in a fresh process; not a Jupyter kernel"
+    }
+  ],
+  "jupyter_kernel": "BLOCKED: environment socket permissions prevented kernel startup; no Jupyter execution claim",
+  "local_file_links_checked": 39,
+  "broken_file_links": 0,
+  "python_compile": "PASS",
+  "archived_reports": [
+    {
+      "path": "reports/archive/week4/healthconnect_week4_project_summary.pdf",
+      "original_unchanged": true,
+      "sha256": "32523da510f1ea43d9ff47b87ba459221d1fe3382f02b79a81aece40aede5191"
+    },
+    {
+      "path": "reports/archive/week4/healthconnect_week4_ml_problem_definition_report.pdf",
+      "original_unchanged": true,
+      "sha256": "b2a8e5b9fbcb93e58ec322e0f258cb49b28327393703a9dfcafe128421558c20"
+    },
+    {
+      "path": "reports/archive/week5/HealthConnect_Week5_Project_Summary.pdf",
+      "original_unchanged": true,
+      "sha256": "849b92637a702884b49183701eed2ced9517398c9551dce7bf8917a6ea141f2f"
+    },
+    {
+      "path": "reports/archive/week5/HealthConnect_Week5_Baseline_Modelling_Report.pdf",
+      "original_unchanged": true,
+      "sha256": "3d892f7da12b78e04f26a3143a08bbe58b9b2f280071a9783082730594df4c05"
+    },
+    {
+      "path": "reports/archive/week6/healthconnect_week6_project_summary.pdf",
+      "original_unchanged": true,
+      "sha256": "36b948903d4789e4eae8a8ce2fec8eaf9f39f7a15dfd9ee91112fb6b8b1b692f"
+    },
+    {
+      "path": "reports/archive/week6/healthconnect_week6_model_improvement_validation_report.pdf",
+      "original_unchanged": true,
+      "sha256": "2e21e217f972e807dbd9efbf3334964b4194f05b2616119722aac00294b8a2b6"
+    },
+    {
+      "path": "reports/archive/week6/healthconnect_week6_cross_track_integration_evidence.pdf",
+      "original_unchanged": true,
+      "sha256": "436c376419e1a822b8c410380a6f72bcd79088b173fb14727f146868924148a3"
+    },
+    {
+      "path": "reports/archive/week8/HealthConnect_Week8_Final_Analytics_and_Decision_Support_Report.pdf",
+      "original_unchanged": true,
+      "sha256": "2f3a08ec503002c6852cf4386485020c58b4388dd1676f8d1653bd1ac5fa185a"
+    },
+    {
+      "path": "reports/archive/week8/HealthConnect_Week8_Project_Summary.pdf",
+      "original_unchanged": true,
+      "sha256": "b74daab7780154deb36611076ef5dc349b7e0625ff6ae723632ac33facbb086a"
+    }
+  ],
+  "browser_preview": "BLOCKED: Chromium unavailable and browser download failed",
+  "visual_review": "Static print-render previews and key source figures inspected separately; browser responsiveness not verified"
+}

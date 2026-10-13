@@ -1,0 +1,35 @@
+current_path,action,reason,final_path
+HealthConnect_Week5_Baseline_Modelling.ipynb,move,Organise by purpose; retain unique evidence,notebooks/02_baseline_modelling.ipynb
+HealthConnect_Week5_Project_Summary.pdf,move,Organise by purpose; retain unique evidence,reports/archive/week5/HealthConnect_Week5_Project_Summary.pdf
+HealthConnect_Week5_Baseline_Modelling_Report.pdf,move,Organise by purpose; retain unique evidence,reports/archive/week5/HealthConnect_Week5_Baseline_Modelling_Report.pdf
+reports/healthconnect_week4_project_summary.pdf,move,Organise by purpose; retain unique evidence,reports/archive/week4/healthconnect_week4_project_summary.pdf
+reports/healthconnect_week4_ml_problem_definition_report.pdf,move,Organise by purpose; retain unique evidence,reports/archive/week4/healthconnect_week4_ml_problem_definition_report.pdf
+week6/reports/healthconnect_week6_project_summary.pdf,move,Organise by purpose; retain unique evidence,reports/archive/week6/healthconnect_week6_project_summary.pdf
+week6/reports/healthconnect_week6_model_improvement_validation_report.pdf,move,Organise by purpose; retain unique evidence,reports/archive/week6/healthconnect_week6_model_improvement_validation_report.pdf
+week6/reports/healthconnect_week6_cross_track_integration_evidence.pdf,move,Organise by purpose; retain unique evidence,reports/archive/week6/healthconnect_week6_cross_track_integration_evidence.pdf
+report/HealthConnect_Week8_Final_Analytics_and_Decision_Support_Report.pdf,move,Organise by purpose; retain unique evidence,reports/archive/week8/HealthConnect_Week8_Final_Analytics_and_Decision_Support_Report.pdf
+report/HealthConnect_Week8_Project_Summary.pdf,move,Organise by purpose; retain unique evidence,reports/archive/week8/HealthConnect_Week8_Project_Summary.pdf
+week6/src/healthconnect.py,move,Organise by purpose; retain unique evidence,src/healthconnect.py
+week6/src/week6_analysis.py,move,Organise by purpose; retain unique evidence,scripts/train_models.py
+week6/models,move,Organise by purpose; retain unique evidence,models
+week6/outputs,move,Organise by purpose; retain unique evidence,outputs/model
+week6/reference,move,Organise by purpose; retain unique evidence,data/reference
+week6/integration/test_interface.py,move,Organise by purpose; retain unique evidence,tests/test_interface.py
+week6/integration/test_results.csv,move,Organise by purpose; retain unique evidence,docs/history/week6_interface_results.csv
+week6/integration/WEEK7_TEST_PLAN.md,move,Organise by purpose; retain unique evidence,docs/history/week7_original_test_plan.md
+week6/integration/sample_input.csv,move,Organise by purpose; retain unique evidence,examples/sample_input.csv
+week6/integration/sample_output.csv,move,Organise by purpose; retain unique evidence,examples/sample_output.csv
+week6/notebooks/03_model_improvement_and_validation.ipynb,move,Organise by purpose; retain unique evidence,notebooks/03_model_comparison.ipynb
+week6/LEARNING_GUIDE_WEEKS_4_TO_6.md,move,Organise by purpose; retain unique evidence,docs/learning_guide_weeks4_to6.md
+week6/REQUIREMENTS_COVERAGE.md,move,Organise by purpose; retain unique evidence,docs/history/week6_requirements.md
+analytics/src/analyze_healthconnect.py,move,Organise by purpose; retain unique evidence,scripts/analyze_healthconnect.py
+analytics/outputs,move,Organise by purpose; retain unique evidence,outputs/analytics
+analytics/HealthConnect_Week8_Analytics_Notebook.ipynb,move,Organise by purpose; retain unique evidence,notebooks/04_final_analytics.ipynb
+dashboard/HealthConnect_Week8_Final_Analytics_Dashboard.html,move,Organise by purpose; retain unique evidence,dashboard/index.html
+week6/data/raw/healthconnect_appointment_data.csv,remove,Byte-identical duplicate; canonical original retained unchanged,data/raw/healthconnect_appointment_data.csv
+data/raw/HealthConnect_Appointment_Data.csv,remove,Byte-identical duplicate; canonical original retained unchanged,data/raw/healthconnect_appointment_data.csv
+data/raw/HealthConnect_Data_Dictionary - Data Dictionary.csv,remove,Byte-identical duplicate; canonical original retained unchanged,data/healthconnect_data_dictionary.csv
+week6/README.md,remove,Superseded package instructions consolidated in root documentation,README.md / requirements.txt
+week6/README_WEEK6_ADDITION.md,remove,Superseded package instructions consolidated in root documentation,README.md / requirements.txt
+week6/requirements.txt,remove,Superseded package instructions consolidated in root documentation,README.md / requirements.txt
+data/PACKAGE_MANIFEST.json,move,Organise by purpose; retain unique evidence,docs/history/week8_package_manifest.json

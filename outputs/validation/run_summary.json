@@ -1,0 +1,16 @@
+{
+  "executed_at": "2026-10-11T06:52:41.212392+00:00",
+  "source_sha256": "1f2c40ae14833b46fe6e1a353446a0e038f19ae06434b37d98545b3e28697137",
+  "candidate": "No-history logistic",
+  "threshold": 0.6,
+  "train_test_shared_patient_ids": 579,
+  "reused_set_returning_rows": 702,
+  "reused_set_unseen_id_rows": 97,
+  "counts": {
+    "PASS": 35,
+    "BLOCKED": 3,
+    "NOT APPLICABLE": 1
+  },
+  "fresh_holdout": false,
+  "human_collaboration_verified": false
+}
